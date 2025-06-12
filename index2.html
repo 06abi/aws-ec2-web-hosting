@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professional HTML, CSS, JS Demo</title>
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9e4f5);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      flex-grow: 1;
+    }
+
+    section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.5rem;
+    }
+
+    form input,
+    .todo input,
+    form button,
+    .todo button {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    form input:focus,
+    .todo input:focus {
+      outline: none;
+      border: 1px solid #007bff;
+    }
+
+    button {
+      background: linear-gradient(to right, #28a745, #218838);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #218838, #1e7e34);
+    }
+
+    #formMessage {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      background: #e6f7ff;
+      margin-bottom: 0.5rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul li button {
+      background: #dc3545;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+      border-radius: 5px;
+    }
+
+    ul li button:hover {
+      background: #c82333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1> HTML, CSS, and JavaScript Project</h1>
+</header>
+
+<main>
+  <!-- Contact Form -->
+  <section>
+    <h2>Contact Form</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <button type="submit">Submit</button>
+      <p id="formMessage" style="color: red;"></p>
+    </form>
+  </section>
+
+  <!-- To-Do List -->
+  <section class="todo">
+    <h2>Dynamic To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task"/>
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Professional Web Practice
+</footer>
+
+<script>
+  // Form validation
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("formMessage");
+
+    if (!name || !email) {
+      message.textContent = "Please fill in all fields.";
+      message.style.color = "red";
+      return;
+    }
+
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailRegex.test(email)) {
+      message.textContent = "Please enter a valid email address.";
+      message.style.color = "red";
+      return;
+    }
+
+    message.style.color = "green";
+    message.textContent = "Form submitted successfully!";
+    this.reset();
+  });
+
+  // To-do list
+  function addTask() {
+    const taskInput = document.getElementById("taskInput");
+    const taskText = taskInput.value.trim();
+
+    if (taskText === "") return;
+
+    const li = document.createElement("li");
+    li.textContent = taskText;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.onclick = () => li.remove();
+
+    li.appendChild(removeBtn);
+    document.getElementById("taskList").appendChild(li);
+    taskInput.value = "";
+  }
+</script>
+
+</body>
+</html>

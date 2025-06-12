@@ -24,11 +24,7 @@ This project demonstrates how to deploy a static HTML website using an Amazon EC
 ## 🔒 Optional Improvements
 
 - Add SSL using Certbot for HTTPS
-- Connect a custom domain using Route 53
-
-## 📸 Screenshots
-
-(Insert screenshots using GitHub upload button)
+- Connect a custom domain using Route
 
 ## 📚 Learnings
 
